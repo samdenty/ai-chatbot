@@ -1,10 +1,10 @@
 import { PreviewMessage } from './message';
-import { useScrollToBottom } from './use-scroll-to-bottom';
 import { Vote } from '@/lib/db/schema';
 import { ChatRequestOptions, Message } from 'ai';
 import { memo } from 'react';
 import equal from 'fast-deep-equal';
 import { UIBlock } from './block';
+import { StickToBottom } from 'use-stick-to-bottom';
 
 interface BlockMessagesProps {
   chatId: string;
@@ -30,14 +30,10 @@ function PureBlockMessages({
   reload,
   isReadonly,
 }: BlockMessagesProps) {
-  const [messagesContainerRef, messagesEndRef] =
-    useScrollToBottom<HTMLDivElement>();
-
   return (
-    <div
-      ref={messagesContainerRef}
-      className="flex flex-col gap-4 h-full items-center overflow-y-scroll px-4 pt-20"
-    >
+    <StickToBottom>
+      <StickToBottom.Content className="flex flex-col gap-4 h-full items-center overflow-y-scroll px-4 pt-20">
+
       {messages.map((message, index) => (
         <PreviewMessage
           chatId={chatId}
@@ -56,10 +52,10 @@ function PureBlockMessages({
       ))}
 
       <div
-        ref={messagesEndRef}
         className="shrink-0 min-w-[24px] min-h-[24px]"
       />
-    </div>
+      </StickToBottom.Content>
+    </StickToBottom>
   );
 }
 
