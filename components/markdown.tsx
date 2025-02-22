@@ -112,11 +112,11 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
       // visualDebug
       maxFps={60}
       streaming={false}
-      splitter="word"
+      splitter="line"
       delayTrailing
-      animation="bounce-in"
+      animation="gradient-reveal"
       gradientWidth="300px"
-      stagger={20}
+      stagger="50%"
       duration={(element) => {
         // if (element.text.innerText.includes('This is an inline code ')) {
         //   return 10000;
